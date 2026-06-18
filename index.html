@@ -4,251 +4,597 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Map of Scents | Eastern Clean Incense Project</title>
+
+    <!-- Google Fonts: Noto Serif SC for Wabi-Sabi headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN with custom Wabi-Sabi theme -->
+    <script>
+        tailwind = { config: {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        cream:  '#FAF8F5',
+                        'warm-white': '#FFFDF9',
+                        zen:    '#3D5A4B',
+                        'zen-deep': '#2F463A',
+                        'zen-light': '#E8EFEA',
+                        'zen-soft': '#F2F7F3',
+                        wood:   '#8B7355',
+                        'wood-deep': '#6B5740',
+                        'wood-light': '#F0EBE3',
+                        'wood-soft': '#F6F2EC',
+                        ink:    '#2B2B2B',
+                        'ink-muted': '#7A7A7A',
+                        'ink-soft': '#9A9A9A',
+                        border: '#E6E2DA',
+                        'border-soft': '#EFECE6',
+                    }
+                }
+            }
+        } }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <style>
-        :root {
-            --bg-color: #f7f5f0;
-            --text-main: #2b2b2b;
-            --text-muted: #6e6e6e;
-            --accent-green: #4a5d4e;
-            --accent-wood: #8c7662;
-            --border-real: #e0ded9;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.7;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            padding: 4rem 0 3rem 0;
-            border-bottom: 1px solid var(--border-real);
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            color: var(--accent-green);
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            letter-spacing: 0.05em;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            margin: 3rem 0 1.5rem 0;
-            text-transform: uppercase;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::after {
-            content: "";
-            flex: 1;
-            margin-left: 1rem;
-            height: 1px;
-            background-color: var(--border-real);
-        }
-
-        .manifesto {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border-left: 3px solid var(--accent-green);
-            margin-bottom: 2rem;
-        }
-
-        .manifesto p {
-            font-style: italic;
-            color: #4a4a4a;
-            font-size: 1.1rem;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-real);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        }
-
-        .card .tag {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 0.2rem 0.6rem;
+        /* Custom checkbox styling — Wabi-Sabi minimal */
+        input[type="checkbox"].zen-check {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.125rem;
+            height: 1.125rem;
+            border: 1.5px solid #C4BDB2;
             border-radius: 2px;
-            display: inline-block;
-            margin-bottom: 1rem;
-        }
-
-        .card .tag-matcha { background: #e2ebd9; color: #556b2f; }
-        .card .tag-longjing { background: #e6f2ee; color: #2e8b57; }
-        .card .tag-hanshan { background: #ede6df; color: #5c4033; }
-
-        .card h3 {
-            font-size: 1.3rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .card .scent-profile {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            border-bottom: 1px dashed var(--border-real);
-            padding-bottom: 0.5rem;
-        }
-
-        .timeline {
-            margin-top: 2rem;
-        }
-
-        .timeline-item {
+            background: #FFFDF9;
+            cursor: pointer;
             position: relative;
-            padding-left: 2rem;
-            border-left: 1px solid var(--accent-wood);
-            padding-bottom: 2rem;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
         }
-
-        .timeline-item::before {
-            content: "";
+        input[type="checkbox"].zen-check:checked {
+            background: #3D5A4B;
+            border-color: #3D5A4B;
+        }
+        input[type="checkbox"].zen-check:checked::after {
+            content: '';
             position: absolute;
-            left: -5px;
-            top: 5px;
-            width: 9px;
+            left: 4px;
+            top: 1px;
+            width: 5px;
             height: 9px;
-            background-color: var(--accent-wood);
-            border-radius: 50%;
+            border: solid #FAF8F5;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        input[type="checkbox"].zen-check:hover {
+            border-color: #8B7355;
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.08);
         }
 
-        .timeline-item:last-child {
-            border-left: none;
-            padding-bottom: 0;
+        /* Tab panel transitions */
+        .tab-panel {
+            transition: opacity 0.25s ease;
+        }
+        .tab-panel.hidden {
+            display: none;
         }
 
-        .timeline-item h4 {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 0.3rem;
+        /* Ledger notes input */
+        .ledger-note {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ledger-note:focus {
+            outline: none;
+            border-color: #8B7355;
+            box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.06);
         }
 
-        .timeline-item p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
+        /* Smooth card hover */
+        .scent-card {
+        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.35s ease;
+        }
+        .scent-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.05);
         }
 
-        footer {
-            text-align: center;
-            margin-top: 5rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-real);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            letter-spacing: 0.05em;
+        /* Fade-in on load */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+        .animate-fade-up {
+        animation: fadeUp 0.7s ease forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
     </style>
 </head>
-<body>
+<body class="bg-cream text-ink font-sans leading-relaxed antialiased">
 
-    <div class="container">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
 
-        <header>
-            <h1>The Map of Scents</h1>
-            <p>Clean Incense & Eco-Friendly Eastern Fragrance Project</p>
-        </header>
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header class="text-center pb-12 md:pb-16 mb-12 md:mb-16 border-b border-border animate-fade-up">
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-light tracking-[0.15em] uppercase text-zen mb-4">
+            The Map of Scents
+        </h1>
+        <p class="text-ink-muted text-base md:text-lg tracking-[0.05em]">
+            Clean Incense &amp; Eco-Friendly Eastern Fragrance Project
+        </p>
+    </header>
 
-        <h2 class="section-title">Brand Narrative & Soul</h2>
-        <div class="manifesto">
-            <p>"Born out of anxiety, grounded in nature. We translate 9.6 million square kilometers of Chinese terroir into healing scent memories. Each stick of incense represents a specific city, a distinct plant, and an invitation to pause, breathe, and reset."</p>
+    <!-- ═══════════════ BRAND NARRATIVE ═══════════════ -->
+    <section class="animate-fade-up delay-1 mb-16 md:mb-20">
+        <h2 class="font-serif text-xl md:text-2xl font-normal tracking-[0.08em] uppercase text-ink flex items-center mb-8">
+            Brand Narrative &amp; Soul
+            <span class="flex-1 ml-4 h-px bg-border"></span>
+        </h2>
+        <div class="bg-warm-white p-6 md:p-10 rounded-sm border-l-[3px] border-zen shadow-sm">
+            <p class="font-serif italic text-ink-muted text-base md:text-lg leading-relaxed">
+                &ldquo;Born out of anxiety, grounded in nature. We translate 9.6 million square kilometers of Chinese terroir into healing scent memories. Each stick of incense represents a specific city, a distinct plant, and an invitation to pause, breathe, and reset.&rdquo;
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════ LAUNCH COLLECTION ═══════════════ -->
+    <section class="animate-fade-up delay-2 mb-16 md:mb-20">
+        <h2 class="font-serif text-xl md:text-2xl font-normal tracking-[0.08em] uppercase text-ink flex items-center mb-8">
+            Launch Collection: Terroir Scheme
+            <span class="flex-1 ml-4 h-px bg-border"></span>
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- ═══ CARD 1: Tongren Matcha ═══ -->
+            <div class="scent-card bg-warm-white rounded-sm border border-border p-6 md:p-7 flex flex-col opacity-0 animate-fade-up delay-2">
+                <span class="inline-block text-[0.7rem] uppercase tracking-[0.12em] px-2.5 py-0.5 rounded-sm bg-zen-light text-zen font-medium mb-4 self-start">
+                    01 / Reset
+                </span>
+                <h3 class="font-serif text-xl md:text-2xl font-medium text-ink mb-2">Tongren Matcha</h3>
+                <p class="text-sm text-ink-muted mb-5 leading-relaxed">
+                    Inspired by the accidental peace found in Tongren, Guizhou. Designed for afternoon anxiety, breaking the digital noise.
+                </p>
+
+                <!-- Mood & Context Tabs -->
+                <div class="mt-auto pt-4 border-t border-border-soft">
+                    <div class="flex gap-1 mb-4 flex-wrap" role="tablist">
+                        <button class="tab-btn active text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="matcha" data-tab="profile" role="tab" aria-selected="true">
+                            香味轮廓
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="matcha" data-tab="context" role="tab" aria-selected="false">
+                            海外使用场景
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="matcha" data-tab="meditation" role="tab" aria-selected="false">
+                            冥想引导词
+                        </button>
+                    </div>
+                    <!-- Tab Panels -->
+                    <div class="tab-panel" data-card="matcha" data-panel="profile">
+                        <p class="text-sm text-ink-muted"><strong class="text-ink">Profile:</strong> Powdery Green, Mellow, Hint of Bitterness</p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="matcha" data-panel="context">
+                        <p class="text-sm text-ink-muted leading-relaxed">
+                            Afternoon WFH reset ritual &bull; Post-lunch digital detox &bull; Yoga shala ambient scent &bull; Wind-down before evening commute
+                        </p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="matcha" data-panel="meditation">
+                        <p class="text-sm text-ink-muted italic leading-relaxed">
+                            &ldquo;Release the digital noise. Let the powdered green settle the mind. Breathe out the afternoon weight.&rdquo;
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ CARD 2: Hangzhou Longjing ═══ -->
+            <div class="scent-card bg-warm-white rounded-sm border border-border p-6 md:p-7 flex flex-col opacity-0 animate-fade-up delay-3">
+                <span class="inline-block text-[0.7rem] uppercase tracking-[0.12em] px-2.5 py-0.5 rounded-sm bg-zen-soft text-zen font-medium mb-4 self-start">
+                    02 / Focus
+                </span>
+                <h3 class="font-serif text-xl md:text-2xl font-medium text-ink mb-2">Hangzhou Longjing</h3>
+                <p class="text-sm text-ink-muted mb-5 leading-relaxed">
+                    Capturing the misty West Lake morning. A clean scent ritual to replace caffeine, bringing clarity and focus.
+                </p>
+
+                <!-- Mood & Context Tabs -->
+                <div class="mt-auto pt-4 border-t border-border-soft">
+                    <div class="flex gap-1 mb-4 flex-wrap" role="tablist">
+                        <button class="tab-btn active text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="longjing" data-tab="profile" role="tab" aria-selected="true">
+                            香味轮廓
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="longjing" data-tab="context" role="tab" aria-selected="false">
+                            海外使用场景
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="longjing" data-tab="meditation" role="tab" aria-selected="false">
+                            冥想引导词
+                        </button>
+                    </div>
+                    <!-- Tab Panels -->
+                    <div class="tab-panel" data-card="longjing" data-panel="profile">
+                        <p class="text-sm text-ink-muted"><strong class="text-ink">Profile:</strong> Fresh Tea Bud, Toasted Bean, Crisp Herb</p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="longjing" data-panel="context">
+                        <p class="text-sm text-ink-muted leading-relaxed">
+                            Morning deep-work sessions &bull; Home office creative flow &bull; Replacing the 3pm coffee slump &bull; Pre-meeting clarity ritual
+                        </p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="longjing" data-panel="meditation">
+                        <p class="text-sm text-ink-muted italic leading-relaxed">
+                            &ldquo;Clarity like a misty lake at dawn. Awaken the senses without force. Each breath sharpens the mind.&rdquo;
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ CARD 3: Suzhou Hanshan Pine ═══ -->
+            <div class="scent-card bg-warm-white rounded-sm border border-border p-6 md:p-7 flex flex-col opacity-0 animate-fade-up delay-4">
+                <span class="inline-block text-[0.7rem] uppercase tracking-[0.12em] px-2.5 py-0.5 rounded-sm bg-wood-light text-wood-deep font-medium mb-4 self-start">
+                    03 / Grounding
+                </span>
+                <h3 class="font-serif text-xl md:text-2xl font-medium text-ink mb-2">Suzhou Hanshan Pine</h3>
+                <p class="text-sm text-ink-muted mb-5 leading-relaxed">
+                    Bringing the timeless zen of Suzhou gardens into midnight decompression. Deeply grounding for profound relaxation.
+                </p>
+
+                <!-- Mood & Context Tabs -->
+                <div class="mt-auto pt-4 border-t border-border-soft">
+                    <div class="flex gap-1 mb-4 flex-wrap" role="tablist">
+                        <button class="tab-btn active text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="hanshan" data-tab="profile" role="tab" aria-selected="true">
+                            香味轮廓
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="hanshan" data-tab="context" role="tab" aria-selected="false">
+                            海外使用场景
+                        </button>
+                        <button class="tab-btn text-xs tracking-[0.06em] px-3 py-1.5 rounded-sm border border-transparent text-ink-muted hover:text-ink hover:bg-wood-soft transition-colors duration-200 font-medium"
+                                data-card="hanshan" data-tab="meditation" role="tab" aria-selected="false">
+                            冥想引导词
+                        </button>
+                    </div>
+                    <!-- Tab Panels -->
+                    <div class="tab-panel" data-card="hanshan" data-panel="profile">
+                        <p class="text-sm text-ink-muted"><strong class="text-ink">Profile:</strong> Ancient Temple Wood, Agarwood, Wet Moss</p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="hanshan" data-panel="context">
+                        <p class="text-sm text-ink-muted leading-relaxed">
+                            Midnight wind-down ritual &bull; Post-yoga savasana &bull; Rainy evening reading nook &bull; Deep meditation before sleep
+                        </p>
+                    </div>
+                    <div class="tab-panel hidden" data-card="hanshan" data-panel="meditation">
+                        <p class="text-sm text-ink-muted italic leading-relaxed">
+                            &ldquo;Root into the earth. Let the ancient temple wood hold you. Stillness is not emptiness — it is the soil of renewal.&rdquo;
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ GTM MASTER WORKFLOW ═══════════════ -->
+    <section class="animate-fade-up delay-3 mb-16 md:mb-20">
+        <h2 class="font-serif text-xl md:text-2xl font-normal tracking-[0.08em] uppercase text-ink flex items-center mb-8">
+            GTM Master Workflow
+            <span class="flex-1 ml-4 h-px bg-border"></span>
+        </h2>
+
+        <div class="space-y-0">
+            <!-- Phase 1 -->
+            <div class="relative pl-8 pb-8 border-l border-wood/30">
+                <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-wood rounded-full"></div>
+                <h4 class="font-serif text-lg font-medium text-ink mb-1">Phase 1: Insight &amp; Position <span class="text-xs text-ink-soft font-sans ml-2 tracking-wider">COMPLETED</span></h4>
+                <p class="text-sm text-ink-muted leading-relaxed">
+                    Locked in the niche ecosystem: &ldquo;Clean Eastern Incense.&rdquo; Established the &lsquo;One Stick = One City&rsquo; concept based on target overseas persona needs.
+                </p>
+            </div>
+            <!-- Phase 2 -->
+            <div class="relative pl-8 pb-8 border-l border-wood/30">
+                <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-wood rounded-full"></div>
+                <h4 class="font-serif text-lg font-medium text-ink mb-1">Phase 2: Product &amp; Compliance <span class="text-xs text-zen font-sans ml-2 tracking-wider">CURRENT</span></h4>
+                <p class="text-sm text-ink-muted leading-relaxed">
+                    Sourcing premium manufacturers in Xiamen/Quanzhou. Requiring MSDS, IFRA conformity, and low-smoke test data to dismantle consumer distrust.
+                </p>
+            </div>
+            <!-- Phase 3 -->
+            <div class="relative pl-8 pb-8 border-l border-wood/30">
+                <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-wood/40 rounded-full"></div>
+                <h4 class="font-serif text-lg font-medium text-ink mb-1">Phase 3: Digital Infrastructure</h4>
+                <p class="text-sm text-ink-muted leading-relaxed">
+                    Setting up a highly aesthetic Shopify storefront optimized for mobile-first experience and transparency in raw materials.
+                </p>
+            </div>
+            <!-- Phase 4 -->
+            <div class="relative pl-8 pb-8 border-l border-wood/30">
+                <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-wood/40 rounded-full"></div>
+                <h4 class="font-serif text-lg font-medium text-ink mb-1">Phase 4: Pre-launch Seeding</h4>
+                <p class="text-sm text-ink-muted leading-relaxed">
+                    Initiating micro-KOL gifting inside Aesthetic Home &amp; Mindfulness niches. Harnessing authentic unboxing ASMR videos.
+                </p>
+            </div>
+            <!-- Phase 5 -->
+            <div class="relative pl-8 border-l border-transparent">
+                <div class="absolute -left-[5px] top-1.5 w-2.5 h-2.5 bg-wood/40 rounded-full"></div>
+                <h4 class="font-serif text-lg font-medium text-ink mb-1">Phase 5: Launch &amp; Scale</h4>
+                <p class="text-sm text-ink-muted leading-relaxed">
+                    Deploying Meta/Google ads backed by UGC content. Implementing Klaviyo retention loops for subscription-based replenishment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ 1688 FACTORY & COMPLIANCE LEDGER ═══════════════ -->
+    <section class="animate-fade-up delay-4 mb-16 md:mb-20">
+        <h2 class="font-serif text-xl md:text-2xl font-normal tracking-[0.08em] uppercase text-ink flex items-center mb-8">
+            1688 Factory &amp; Compliance Ledger
+            <span class="flex-1 ml-4 h-px bg-border"></span>
+        </h2>
+        <p class="text-sm text-ink-muted mb-6 -mt-4">
+            寻厂与合规自查看板 &mdash; 勾选状态与备注自动保存至浏览器，刷新不丢失。
+        </p>
+
+        <!-- Desktop Table -->
+        <div class="hidden md:block overflow-hidden rounded-sm border border-border bg-warm-white">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-border bg-wood-soft/50">
+                        <th class="text-left px-5 py-3.5 font-serif font-medium text-ink text-xs tracking-[0.06em] uppercase">Factory / Location</th>
+                        <th class="text-left px-5 py-3.5 font-serif font-medium text-ink text-xs tracking-[0.06em] uppercase">Product Match</th>
+                        <th class="text-center px-5 py-3.5 font-serif font-medium text-ink text-xs tracking-[0.06em] uppercase w-40">Compliance</th>
+                        <th class="text-left px-5 py-3.5 font-serif font-medium text-ink text-xs tracking-[0.06em] uppercase">Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="ledger-body-desktop"></tbody>
+            </table>
         </div>
 
-        <h2 class="section-title">Launch Collection: Terroir Scheme</h2>
-        <div class="grid">
-            <div class="card">
-                <span class="tag tag-matcha">01 / Reset</span>
-                <h3>Tongren Matcha</h3>
-                <p class="scent-profile"><strong>Profile:</strong> Powdery Green, Mellow, Hint of Bitterness</p>
-                <p>Inspired by the accidental peace found in Tongren, Guizhou. Designed for afternoon anxiety, breaking the digital noise.</p>
-            </div>
-            <div class="card">
-                <span class="tag tag-longjing">02 / Focus</span>
-                <h3>Hangzhou Longjing</h3>
-                <p class="scent-profile"><strong>Profile:</strong> Fresh Tea Bud, Toasted Bean, Crisp Herb</p>
-                <p>Capturing the misty West Lake morning. A clean scent ritual to replace caffeine, bringing clarity and focus.</p>
-            </div>
-            <div class="card">
-                <span class="tag tag-hanshan">03 / Grounding</span>
-                <h3>Suzhou Hanshan Pine</h3>
-                <p class="scent-profile"><strong>Profile:</strong> Ancient Temple Wood, Agarwood, Wet Moss</p>
-                <p>Bringing the timeless zen of Suzhou gardens into midnight decompression. Deeply grounding for profound relaxation.</p>
-            </div>
-        </div>
+        <!-- Mobile Cards -->
+        <div class="md:hidden space-y-4" id="ledger-cards"></div>
+    </section>
 
-        <h2 class="section-title">GTM Master Workflow</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <h4>Phase 1: Insight & Position (Completed)</h4>
-                <p>Locked in the niche ecosystem: "Clean Eastern Incense." Established the 'One Stick = One City' concept based on target overseas persona needs.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>Phase 2: Product & Compliance (Current Strategy)</h4>
-                <p>Sourcing premium manufacturers in Xiamen/Quanzhou. Requiring MSDS, IFRA conformity, and low-smoke test data to dismantle consumer distrust.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>Phase 3: Digital Infrastructure</h4>
-                <p>Setting up a highly aesthetic Shopify storefront optimized for mobile-first experience and transparency in raw materials.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>Phase 4: Pre-launch Seeding</h4>
-                <p>Initiating micro-KOL gifting inside Aesthetic Home & Mindfulness niches. Harnessing authentic unboxing ASMR videos.</p>
-            </div>
-            <div class="timeline-item">
-                <h4>Phase 5: Launch & Scale</h4>
-                <p>Deploying Meta/Google ads backed by UGC content. Implementing Klaviyo retention loops for subscription-based replenishment.</p>
-            </div>
-        </div>
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="text-center pt-8 mt-8 border-t border-border text-ink-muted text-xs tracking-[0.05em] animate-fade-up delay-5">
+        <p>&copy; 2026 The Map of Scents Project. Curated for Global GTM Execution.</p>
+    </footer>
 
-        <footer>
-            <p>&copy; 2026 The Map of Scents Project. Curated for Global GTM Execution.</p>
-        </footer>
+</div>
 
-    </div>
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<script>
+/* ── Mood & Context Tab Switcher ── */
+(function() {
+    // Tab click handler
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var card    = this.getAttribute('data-card');
+            var tab     = this.getAttribute('data-tab');
+            var parent  = this.closest('.scent-card, [class*="flex flex-col"]');
+            // Actually find the closest ancestor that contains the full card
+            var container = this.parentElement.parentElement; // .tab-btn → .flex (tab bar) → .mt-auto (tab container)
+
+            // Deactivate all tab buttons in this card
+            container.querySelectorAll('.tab-btn').forEach(function(b) {
+                b.classList.remove('active');
+                b.style.borderBottom = '';
+                b.style.color = '';
+                b.setAttribute('aria-selected', 'false');
+            });
+
+            // Activate clicked button
+            this.classList.add('active');
+            this.style.borderBottom = '2px solid #3D5A4B';
+            this.style.color = '#2B2B2B';
+            this.setAttribute('aria-selected', 'true');
+
+            // Hide all panels in this card
+            container.querySelectorAll('.tab-panel').forEach(function(p) {
+                p.classList.add('hidden');
+            });
+
+            // Show matching panel
+            var panel = container.querySelector('[data-panel="' + tab + '"]');
+            if (panel) {
+                panel.classList.remove('hidden');
+            }
+        });
+    });
+
+    // Initialize: activate first tab in each card
+    document.querySelectorAll('.scent-card').forEach(function(card) {
+        var firstBtn = card.querySelector('.tab-btn');
+        if (firstBtn) {
+            firstBtn.style.borderBottom = '2px solid #3D5A4B';
+            firstBtn.style.color = '#2B2B2B';
+        }
+    });
+})();
+
+
+/* ── Factory Ledger Data ── */
+var FACTORIES = [
+    {
+        id: 'xiangdaotang',
+        name: '厦门香道堂生物科技有限公司',
+        location: 'Xiamen, Fujian',
+        product: 'Matcha & Green Tea incense series, 12yr export history, bamboo-core & coreless options'
+    },
+    {
+        id: 'qingyuan',
+        name: '泉州清源香业',
+        location: 'Quanzhou, Fujian',
+        product: 'Temple-grade wood & agarwood incense, family workshop since 1980s, small-batch capable'
+    },
+    {
+        id: 'miaoxiangtang',
+        name: '厦门妙香堂工艺品有限公司',
+        location: 'Xiamen, Fujian',
+        product: 'Eco-certified bamboo-core sticks, low MOQ (500 boxes/SKU), English-labeled export ready'
+    },
+    {
+        id: 'shuixian',
+        name: '漳州水仙香坊',
+        location: 'Zhangzhou, Fujian',
+        product: '100% natural plant-based, zero synthetic fragrance oils, Narcissus-themed heritage line'
+    },
+    {
+        id: 'tianxiangge',
+        name: '福州天香阁制香厂',
+        location: 'Fuzhou, Fujian',
+        product: 'Premium agarwood & sandalwood, existing Japan/SEA export channels, IFRA-ready documentation'
+    }
+];
+
+var STORAGE_KEY = 'mos-factory-ledger';
+
+/* ── LocalStorage Helpers ── */
+function loadLedgerData() {
+    try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function saveLedgerData(data) {
+    try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+        // Storage full or unavailable — silently fail
+    }
+}
+
+function getFactoryState(id) {
+    var data = loadLedgerData();
+    return data[id] || { msds: false, ifra: false, lowSmoke: false, notes: '' };
+}
+
+function setCheckbox(id, field, value) {
+    var data = loadLedgerData();
+    if (!data[id]) data[id] = { msds: false, ifra: false, lowSmoke: false, notes: '' };
+    data[id][field] = value;
+    saveLedgerData(data);
+}
+
+function setNotes(id, value) {
+    var data = loadLedgerData();
+    if (!data[id]) data[id] = { msds: false, ifra: false, lowSmoke: false, notes: '' };
+    data[id]['notes'] = value;
+    saveLedgerData(data);
+}
+
+
+/* ── Render Ledger ── */
+function buildCheckboxHTML(factoryId, field, label, checked) {
+    return '<label class="inline-flex items-center gap-1.5 cursor-pointer whitespace-nowrap" title="' + label + '">' +
+        '<input type="checkbox" class="zen-check ledger-cb" data-factory="' + factoryId + '" data-field="' + field + '"' + (checked ? ' checked' : '') + '>' +
+        '<span class="text-xs text-ink-muted">' + label + '</span>' +
+        '</label>';
+}
+
+function renderLedger() {
+    var desktopBody = document.getElementById('ledger-body-desktop');
+    var cardsContainer = document.getElementById('ledger-cards');
+
+    FACTORIES.forEach(function(f, idx) {
+        var state = getFactoryState(f.id);
+
+        /* ── Desktop row ── */
+        if (desktopBody) {
+            var tr = document.createElement('tr');
+            tr.className = 'border-b border-border-soft hover:bg-wood-soft/30 transition-colors duration-150';
+            tr.innerHTML =
+                '<td class="px-5 py-4 align-top">' +
+                    '<div class="font-medium text-ink text-sm">' + f.name + '</div>' +
+                    '<div class="text-xs text-ink-soft mt-0.5">' + f.location + '</div>' +
+                '</td>' +
+                '<td class="px-5 py-4 text-ink-muted text-sm leading-relaxed align-top">' + f.product + '</td>' +
+                '<td class="px-5 py-4 align-top text-center">' +
+                    '<div class="flex flex-col gap-2 items-center">' +
+                        buildCheckboxHTML(f.id, 'msds', 'MSDS', state.msds) +
+                        buildCheckboxHTML(f.id, 'ifra', 'IFRA', state.ifra) +
+                        buildCheckboxHTML(f.id, 'lowSmoke', 'Low-Smoke', state.lowSmoke) +
+                    '</div>' +
+                '</td>' +
+                '<td class="px-5 py-4 align-top">' +
+                    '<input type="text" class="ledger-note w-full bg-cream border border-border rounded-sm px-3 py-2 text-sm text-ink placeholder:text-ink-soft" ' +
+                        'data-factory="' + f.id + '" data-field="notes" ' +
+                        'placeholder="备注 / Notes..." ' +
+                        'value="' + escapeHTML(state.notes || '') + '">' +
+                '</td>';
+            desktopBody.appendChild(tr);
+        }
+
+        /* ── Mobile card ── */
+        if (cardsContainer) {
+            var card = document.createElement('div');
+            card.className = 'bg-warm-white border border-border rounded-sm p-5';
+            card.innerHTML =
+                '<div class="font-medium text-ink text-sm mb-1">' + f.name + '</div>' +
+                '<div class="text-xs text-ink-soft mb-2">' + f.location + '</div>' +
+                '<div class="text-sm text-ink-muted mb-4 leading-relaxed">' + f.product + '</div>' +
+                '<div class="flex items-center gap-4 mb-3 flex-wrap">' +
+                    buildCheckboxHTML(f.id, 'msds', 'MSDS', state.msds) +
+                    buildCheckboxHTML(f.id, 'ifra', 'IFRA', state.ifra) +
+                    buildCheckboxHTML(f.id, 'lowSmoke', 'Low-Smoke', state.lowSmoke) +
+                '</div>' +
+                '<input type="text" class="ledger-note w-full bg-cream border border-border rounded-sm px-3 py-2 text-sm text-ink placeholder:text-ink-soft" ' +
+                    'data-factory="' + f.id + '" data-field="notes" ' +
+                    'placeholder="备注 / Notes..." ' +
+                    'value="' + escapeHTML(state.notes || '') + '">';
+            cardsContainer.appendChild(card);
+        }
+    });
+
+    /* ── Bind events ── */
+    // Checkbox change
+    document.querySelectorAll('.ledger-cb').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+            var factoryId = this.getAttribute('data-factory');
+            var field     = this.getAttribute('data-field');
+            setCheckbox(factoryId, field, this.checked);
+        });
+    });
+
+    // Notes input (debounced)
+    var noteTimers = {};
+    document.querySelectorAll('.ledger-note').forEach(function(input) {
+        input.addEventListener('input', function() {
+            var factoryId = this.getAttribute('data-factory');
+            var value = this.value;
+            clearTimeout(noteTimers[factoryId]);
+            noteTimers[factoryId] = setTimeout(function() {
+                setNotes(factoryId, value);
+            }, 400);
+        });
+    });
+}
+
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+
+/* ── Init ── */
+renderLedger();
+</script>
 
 </body>
 </html>
