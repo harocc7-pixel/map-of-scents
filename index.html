@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Map of Scents | Eastern Clean Incense Project</title>
+    <style>
+        :root {
+            --bg-color: #f7f5f0;
+            --text-main: #2b2b2b;
+            --text-muted: #6e6e6e;
+            --accent-green: #4a5d4e;
+            --accent-wood: #8c7662;
+            --border-real: #e0ded9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem 0;
+            border-bottom: 1px solid var(--border-real);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin: 3rem 0 1.5rem 0;
+            text-transform: uppercase;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: "";
+            flex: 1;
+            margin-left: 1rem;
+            height: 1px;
+            background-color: var(--border-real);
+        }
+
+        .manifesto {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+            border-left: 3px solid var(--accent-green);
+            margin-bottom: 2rem;
+        }
+
+        .manifesto p {
+            font-style: italic;
+            color: #4a4a4a;
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-real);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+        }
+
+        .card .tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .card .tag-matcha { background: #e2ebd9; color: #556b2f; }
+        .card .tag-longjing { background: #e6f2ee; color: #2e8b57; }
+        .card .tag-hanshan { background: #ede6df; color: #5c4033; }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .card .scent-profile {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            border-bottom: 1px dashed var(--border-real);
+            padding-bottom: 0.5rem;
+        }
+
+        .timeline {
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 1px solid var(--accent-wood);
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 9px;
+            height: 9px;
+            background-color: var(--accent-wood);
+            border-radius: 50%;
+        }
+
+        .timeline-item:last-child {
+            border-left: none;
+            padding-bottom: 0;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-real);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>The Map of Scents</h1>
+            <p>Clean Incense & Eco-Friendly Eastern Fragrance Project</p>
+        </header>
+
+        <h2 class="section-title">Brand Narrative & Soul</h2>
+        <div class="manifesto">
+            <p>"Born out of anxiety, grounded in nature. We translate 9.6 million square kilometers of Chinese terroir into healing scent memories. Each stick of incense represents a specific city, a distinct plant, and an invitation to pause, breathe, and reset."</p>
+        </div>
+
+        <h2 class="section-title">Launch Collection: Terroir Scheme</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="tag tag-matcha">01 / Reset</span>
+                <h3>Tongren Matcha</h3>
+                <p class="scent-profile"><strong>Profile:</strong> Powdery Green, Mellow, Hint of Bitterness</p>
+                <p>Inspired by the accidental peace found in Tongren, Guizhou. Designed for afternoon anxiety, breaking the digital noise.</p>
+            </div>
+            <div class="card">
+                <span class="tag tag-longjing">02 / Focus</span>
+                <h3>Hangzhou Longjing</h3>
+                <p class="scent-profile"><strong>Profile:</strong> Fresh Tea Bud, Toasted Bean, Crisp Herb</p>
+                <p>Capturing the misty West Lake morning. A clean scent ritual to replace caffeine, bringing clarity and focus.</p>
+            </div>
+            <div class="card">
+                <span class="tag tag-hanshan">03 / Grounding</span>
+                <h3>Suzhou Hanshan Pine</h3>
+                <p class="scent-profile"><strong>Profile:</strong> Ancient Temple Wood, Agarwood, Wet Moss</p>
+                <p>Bringing the timeless zen of Suzhou gardens into midnight decompression. Deeply grounding for profound relaxation.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">GTM Master Workflow</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>Phase 1: Insight & Position (Completed)</h4>
+                <p>Locked in the niche ecosystem: "Clean Eastern Incense." Established the 'One Stick = One City' concept based on target overseas persona needs.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Phase 2: Product & Compliance (Current Strategy)</h4>
+                <p>Sourcing premium manufacturers in Xiamen/Quanzhou. Requiring MSDS, IFRA conformity, and low-smoke test data to dismantle consumer distrust.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Phase 3: Digital Infrastructure</h4>
+                <p>Setting up a highly aesthetic Shopify storefront optimized for mobile-first experience and transparency in raw materials.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Phase 4: Pre-launch Seeding</h4>
+                <p>Initiating micro-KOL gifting inside Aesthetic Home & Mindfulness niches. Harnessing authentic unboxing ASMR videos.</p>
+            </div>
+            <div class="timeline-item">
+                <h4>Phase 5: Launch & Scale</h4>
+                <p>Deploying Meta/Google ads backed by UGC content. Implementing Klaviyo retention loops for subscription-based replenishment.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 The Map of Scents Project. Curated for Global GTM Execution.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
